@@ -5,7 +5,7 @@ var computerChoices = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l
 var wins = 0;
 var losses = 0;
 var remainingGuesses = 10;
-//var guessesSoFar = [];
+var userInputArr = [];
 
 // Creating variables that hold references to the places in HTML where will be displaying things
 var winsText = document.getElementById('wins-text');
@@ -18,15 +18,15 @@ document.onkeyup = function(event) {
     
     // Determines which key was pressed.
     var userInput = String.fromCharCode(event.keyCode).toLowerCase();
-    //guessesSoFar.push(userInput);
+    userInputArr.push(userInput);
 
-    //var userInput = event.key.toLowerCase();
+    // Making sure userInput correct;
     console.log(userInput);
 
-    // Randomly chooses choice from computer options array. This Computer's guess.
+    // Randomly chooses choice from computer options array. 
     var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
     
-    // Making sure that game works!
+    // Making sure that computer choices work!
     console.log(computerGuess);
 
     // Scoring: Increase win counter by 1 if user guess = computer guess
@@ -37,15 +37,15 @@ document.onkeyup = function(event) {
     else {
         remainingGuesses--;
     }
-    // When remaining guesses counter reaches 0, increase the losses counter by 1 and reset the remaining guesses counter
+    // When remaining guesses counter reaches 0, increase the losses counter by 1 and reset the remaining guesses counter and user input
     if(remainingGuesses === 0) {
-        (++losses) && (remainingGuesses = 10); 
+        (++losses) && (remainingGuesses = 10) && (userInputArr = []);
     }
     
 // Display the user and computer gusses
 winsText.textContent = 'Wins: ' + wins;
 lossesText.textContent = 'Losses: ' + losses;
 guessesLeftText.textContent = 'Guesses Left: ' + remainingGuesses;
-userInputText.textContent = 'Your Guesses so far: ' + userInput;
+userInputText.textContent = 'Your Guesses so far: ' + userInputArr;
 }
 
